@@ -273,3 +273,50 @@ echo "</pre>";*/
     }
 }
 add_action( 'save_post', 'wporg_save_postdata' );
+
+
+//custom field for service post type start 
+function services_custom_post_type_init() {
+  	register_post_type( 'services',
+					  		array(
+								'labels' => array('name' => ( 'services' ), 'singular_name' => __( 'service' ) ),
+								'public' => true,
+								'has_archive' => true,
+								'supports' => array('title', 'editor', 'thumbnail')
+							)
+  	);
+}
+add_action( 'init', 'services_custom_post_type_init' );
+
+function services_add_custom_fields() {
+    $screens = [ 'services' ];
+    foreach ( $screens as $screen ) {
+        add_meta_box(
+            'services_box_id',                 // Unique ID
+            'Services Icon',      // Box title
+            'services_custom_box_html',  // Content callback, must be of type callable
+            $screen                            // Post type
+        );
+    }
+}
+add_action( 'add_meta_boxes', 'services_add_custom_fields' );
+
+function services_custom_box_html( $post ) {
+$value = get_post_meta( $post->ID, 'services_meta_key', true );
+?>
+    <label for="services_field">Service Fa Icon Class </label>
+    <input type="text" name="services_field" value="<?php echo $value;?>">
+    <?php
+}
+
+function services_save_postdata( $post_id ) {
+	/*echo "<pre>";
+	print_r($_POST);
+	echo "</pre>";
+	die('ss');*/
+    if ( array_key_exists( 'services_field', $_POST ) ) {
+        update_post_meta($post_id, 'services_meta_key',$_POST['services_field']);
+    }
+}
+add_action( 'save_post', 'services_save_postdata' );
+//custom field for service post type end

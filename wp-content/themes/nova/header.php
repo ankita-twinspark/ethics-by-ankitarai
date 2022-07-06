@@ -60,7 +60,7 @@
         <ul>
           <li><a href="index.html" class="active">Home</a></li>
           <li><a href="http://localhost/ethics/?page_id=45">About</a></li>
-          <li><a href="services.html">Services</a></li>
+          <li><a href="http://localhost/ethics/?page_id=48">Services</a></li>
           <li><a href="portfolio.html">Portfolio</a></li>
           <li><a href="team.html">Team</a></li>
           <li><a href="blog.html">Blog</a></li>
